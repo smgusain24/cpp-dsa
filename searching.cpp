@@ -20,6 +20,27 @@ public:
         }
         return -1;
     }
+
+    int binarySearch() {
+        int left_ptr = 0;
+        int right_ptr = N-1;
+        int middle_ptr = (left_ptr + right_ptr)/2;
+
+        while(left_ptr<=right_ptr) {
+            if (arr[middle_ptr] == to_search) {
+                return middle_ptr;
+            }
+            else if (arr[middle_ptr]>to_search) {
+                right_ptr = middle_ptr - 1;
+            }
+            else {
+                left_ptr = middle_ptr + 1;
+            }
+
+            middle_ptr = (left_ptr+right_ptr)/2;
+        }
+        return -1;
+    }
 };
 
 int main() {
@@ -33,8 +54,33 @@ int main() {
     }
     std::cout << "Enter element to find" << std::endl;
     std::cin >> to_find;
+
+    // Initialize search object
     Search search_obj(size, arr, to_find);
-    std::cout << search_obj.linearSearch() << std::endl;
+
+    // Linear Search
+
+    int index = search_obj.linearSearch();
+    if (index >-1) {
+    std::cout << "This element is at index: " << index << std::endl;
+
+    }
+    else {
+    std::cout << "This element is not present in the array " << std::endl;
+
+    }
+
+    // Binary Search
+
+    index = search_obj.binarySearch();
+
+    if (index >-1) {
+        std::cout << "This element is at index: " << index << std::endl;
+    }
+    else {
+    std::cout << "This element is not present in the array " << std::endl;
+
+    }
 
     return 0;
 }
